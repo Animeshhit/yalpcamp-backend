@@ -87,4 +87,34 @@ Router.delete("/deleteComment", authenticateToken, async (req, res) => {
   }
 });
 
+Router.get("/post/search", async (req, res) => {
+  const { q } = req.query;
+  try {
+    if (!q || q.trim() === "") {
+      return res.status(400).json({ message: "Please provide a search word." });
+    }
+    // Create a case-insensitive regular expression using the searchWord
+    const searchRegex = new RegExp(q, "i");
+
+    // Build the search query based on the regular expression
+    const searchQuery = { title: searchRegex };
+    // Perform the search using the built query
+    const posts = await Post.find(searchQuery);
+
+    if (posts.length === 0) {
+      return res
+        .status(404)
+        .json({ message: "No posts found matching the search criteria." });
+    }
+
+    res.json({ posts });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({
+      message: "An error occurred while searching for posts.",
+      error: err,
+    });
+  }
+});
+
 module.exports = Router;
