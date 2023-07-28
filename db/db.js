@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+const { connect } = require("mongoose");
 const dotenv = require("dotenv");
 
 dotenv.config();
@@ -6,8 +6,7 @@ dotenv.config();
 const url = process.env.MONGO_URL;
 
 const connectToDb = (callback) => {
-  mongoose
-    .connect(url, { useNewUrlParser: true, useUnifiedTopology: true })
+  connect(url, { useNewUrlParser: true, useUnifiedTopology: true })
     .then(() => {
       console.log("Connected to MongoDB Atlas");
       callback(true);

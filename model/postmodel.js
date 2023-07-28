@@ -1,6 +1,6 @@
-const mongoose = require("mongoose");
+const { Schema, model } = require("mongoose");
 
-const commentSchema = new mongoose.Schema({
+const commentSchema = new Schema({
   userName: {
     type: String,
     required: true,
@@ -19,7 +19,7 @@ const commentSchema = new mongoose.Schema({
   },
 });
 
-const postSchema = new mongoose.Schema({
+const postSchema = new Schema({
   title: {
     type: String,
     required: true,
@@ -54,6 +54,6 @@ const postSchema = new mongoose.Schema({
   },
 });
 
-const Post = mongoose.model("Post", postSchema);
+const Post = model("Post", postSchema);
 
 module.exports = Post;
