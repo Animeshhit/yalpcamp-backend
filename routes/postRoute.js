@@ -4,7 +4,12 @@ const { authenticateToken } = require("../middalware/index");
 
 Router.get("/posts", async (req, res) => {
   try {
-    const allPosts = await Post.find({});
+    const allPosts = await Post.find({}).select({
+      title: 1,
+      description: 1,
+      image: 1,
+      _id: 1,
+    });
     res.json({ posts: allPosts });
   } catch (error) {
     console.log(error);
@@ -15,7 +20,17 @@ Router.get("/posts", async (req, res) => {
 Router.get("/post", async (req, res) => {
   try {
     let postId = req.query.id;
-    const post = await Post.findById({ _id: postId });
+    const post = await Post.findById({ _id: postId }).select({
+      _id: 1,
+      title: 1,
+      description: 1,
+      price: 1,
+      userId: 1,
+      image: 1,
+      userName: 1,
+      comments: 1,
+      createdAt: 1,
+    });
     if (post) {
       res.json({ post });
     } else {
@@ -48,7 +63,17 @@ Router.post("/newPost", authenticateToken, async (req, res) => {
 Router.post("/newComment", authenticateToken, async (req, res) => {
   try {
     let postId = req.query.id;
-    const post = await Post.findById({ _id: postId });
+    const post = await Post.findById({ _id: postId }).select({
+      _id: 1,
+      title: 1,
+      description: 1,
+      price: 1,
+      userId: 1,
+      image: 1,
+      userName: 1,
+      comments: 1,
+      createdAt: 1,
+    });
     if (!post) {
       return res.status(404).json({ message: "Not Found!" });
     }
@@ -99,7 +124,12 @@ Router.get("/post/search", async (req, res) => {
     // Build the search query based on the regular expression
     const searchQuery = { title: searchRegex };
     // Perform the search using the built query
-    const posts = await Post.find(searchQuery);
+    const posts = await Post.find(searchQuery).select({
+      title: 1,
+      description: 1,
+      image: 1,
+      _id: 1,
+    });
 
     if (posts.length === 0) {
       return res
