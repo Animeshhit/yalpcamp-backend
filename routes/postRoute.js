@@ -64,15 +64,7 @@ Router.post("/newComment", authenticateToken, async (req, res) => {
   try {
     let postId = req.query.id;
     const post = await Post.findById({ _id: postId }).select({
-      _id: 1,
-      title: 1,
-      description: 1,
-      price: 1,
-      userId: 1,
-      image: 1,
-      userName: 1,
       comments: 1,
-      createdAt: 1,
     });
     if (!post) {
       return res.status(404).json({ message: "Not Found!" });
@@ -84,7 +76,7 @@ Router.post("/newComment", authenticateToken, async (req, res) => {
     res.json({ post: updatedPost });
   } catch (error) {
     res.status(500).json({ message: error.message });
-    console.log(err);
+    console.log(error);
   }
 });
 
