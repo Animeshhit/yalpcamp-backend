@@ -20,7 +20,7 @@ app.use("/api/v1", postRouter);
 app.listen(PORT, () => {
   db((isConnect) => {
     if (isConnect) {
-      console.log("Server is running on http://localhost:3000");
+      console.log(`Server is running on http://localhost:${PORT}`);
     } else {
       console.log("Server Can't Be Start...");
     }
