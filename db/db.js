@@ -6,7 +6,7 @@ dotenv.config();
 const url = process.env.MONGO_URL;
 
 const connectToDb = (callback) => {
-  connect(url, { useNewUrlParser: true, useUnifiedTopology: true })
+  connect(url)
     .then(() => {
       console.log("Connected to MongoDB Atlas");
       callback(true);
