@@ -1,12 +1,12 @@
 const express = require("express");
-const db = require("./db/db");
+const db = require("../db/db");
 
 const cors = require("cors");
 
 const app = express();
 
-const Router = require("./routes/route");
-const postRouter = require("./routes/postRoute");
+const Router = require("../routes/route");
+const postRouter = require("../routes/postRoute");
 
 const PORT = process.env.PORT || "8080";
 
