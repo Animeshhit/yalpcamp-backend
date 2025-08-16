@@ -17,6 +17,6 @@ const userSchema = new Schema({
   },
 });
 
-const User = model("userData", userSchema);
+const User = model("yalpcampuser", userSchema);
 
 module.exports = User;

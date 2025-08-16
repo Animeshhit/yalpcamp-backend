@@ -54,6 +54,6 @@ const postSchema = new Schema({
   },
 });
 
-const Post = model("Post", postSchema);
+const Post = model("yalpcamp", postSchema);
 
 module.exports = Post;
